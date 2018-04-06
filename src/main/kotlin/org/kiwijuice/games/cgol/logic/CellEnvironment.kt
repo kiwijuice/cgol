@@ -26,7 +26,7 @@ class CellEnvironment {
 
             for (i in cell.x - 1 .. cell.x + 1) {
                 for (j in cell.y - 1 .. cell.y + 1) {
-                    val indexesAreInGrid = i >= 0 && j >= 0 && i < grid.width && j< grid.width
+                    val indexesAreInGrid = i >= 0 && j >= 0 && i < grid.width && j < grid.height
                     val isCurrentCell = i == cell.x && j == cell.y
 
                     if (indexesAreInGrid && !isCurrentCell) {
