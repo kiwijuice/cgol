@@ -1,5 +1,7 @@
 package org.kiwijuice.games.cgol
 
+import org.kiwijuice.games.cgol.visualization.ConsoleVisualizer
+
 val GRID_SIZE = 70
 
 fun main(args: Array<String>) {
@@ -14,13 +16,12 @@ fun main(args: Array<String>) {
     grid[41, 43] = true
 
 
-    Thread.sleep(1300)
 
-
+    val visualizer = ConsoleVisualizer()
 
     while (true) {
-        print("\u001b[H\u001b[2J")
-        grid.printGrid()
+
+        visualizer.printGrid(grid)
 
         Thread.sleep(200)
 

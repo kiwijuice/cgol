@@ -1,10 +1,11 @@
 package org.kiwijuice.games.cgol
 
 class CellEnvironment {
+
     companion object {
 
         /**
-         * Find the eight neighbors of a cell in the grid.
+         * Find all the neighbors of a cell in the grid.
          * If the cell is located on one of the walls of the grid, the method will return
          * all the available neighbors.
          */

@@ -1,9 +1,18 @@
 package org.kiwijuice.games.cgol
-private typealias CellGrid = Array<BooleanArray>
 
+private typealias BooleanMatrix = Array<BooleanArray>
+
+/**
+ * Initializes a grid with dead cells.
+ * @param width The width of the grid (no. of cells).
+ * @param height The height of the grid (no. of cells).
+ */
 class Grid(val width:Int, val height:Int) : Iterable<Cell> {
 
-    class GridIterator(val grid: Grid) : Iterator<Cell>  {
+    /**
+     * Implements iterator over all the cells in a grid.
+     */
+    class GridIterator(private val grid: Grid) : Iterator<Cell>  {
 
         private var cursor = 0
         private val numberOfCells = grid.width * grid.height
@@ -21,14 +30,27 @@ class Grid(val width:Int, val height:Int) : Iterable<Cell> {
         }
     }
 
+    /**
+     * Holds the state (alive or dead) of each cell in the grid.
+     */
+    private var cellsStateMatrix: BooleanMatrix = Array(height, {
+        BooleanArray(width)
+    })
+
+    /**
+     * Returns a grid iterator over the cells in the grid.
+     * @return A grid iterator over the cells in the grid.
+     */
     override fun iterator(): Iterator<Cell> {
         return GridIterator(this)
     }
 
-    var cellGrid: CellGrid = Array(height, {
-        BooleanArray(width)
-    })
-
+    /**
+     * Returns the cell located in position (x, y)
+     * @param x The horizontal position of the cell.
+     * @param y The vertical position of the cell.
+     * @return The cell located in the given position.
+     */
     operator fun get(x: Int, y:Int): Cell {
 
         if (x < 0 || y < 0) {
@@ -39,10 +61,16 @@ class Grid(val width:Int, val height:Int) : Iterable<Cell> {
             throw IndexOutOfBoundsException("Index must be in the size of the array")
         }
 
-        return Cell(cellGrid[y][x], x, y)
+        return Cell(cellsStateMatrix[y][x], x, y)
     }
 
-    operator fun set(x: Int, y: Int, isLive: Boolean) {
+    /**
+     * Sets the status (alive or dead) of the cell located in position (x, y)
+     * @param x The horizontal position of the cell.
+     * @param y The vertical position of the cell.
+     * @param alive Sets the status of the cell.
+     */
+    operator fun set(x: Int, y: Int, alive: Boolean) {
 
         if (x < 0 || y < 0) {
             throw IndexOutOfBoundsException("Indexes must be greater than zero")
@@ -52,26 +80,6 @@ class Grid(val width:Int, val height:Int) : Iterable<Cell> {
             throw IndexOutOfBoundsException("Index must be in the size of the array")
         }
 
-        cellGrid[y][x] = isLive
-    }
-
-    fun printGrid() {
-        cellGrid.forEach { row ->
-
-            print("(")
-            row.forEach {
-                column -> printCell(column)
-            }
-
-            println(")")
-        }
-    }
-
-    private fun printCell(isLive: Boolean) {
-        if (isLive) {
-            print("<#>")
-        } else {
-            print("   ")
-        }
+        cellsStateMatrix[y][x] = alive
     }
 }
