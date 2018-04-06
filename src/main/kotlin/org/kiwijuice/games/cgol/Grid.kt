@@ -76,7 +76,7 @@ class Grid(val width:Int, val height:Int) : Iterable<Cell> {
             throw IndexOutOfBoundsException("Indexes must be greater than zero")
         }
 
-        if (x >= height || y >= width) {
+        if (x >= width || y >= height) {
             throw IndexOutOfBoundsException("Index must be in the size of the array")
         }
 

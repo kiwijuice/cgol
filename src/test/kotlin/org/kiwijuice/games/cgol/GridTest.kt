@@ -44,7 +44,7 @@ class GridTest {
     }
 
     @Test(expected = IndexOutOfBoundsException::class)
-    fun get_ifPositionIsNotInGrid_exepctionIsThrown() {
+    fun get_ifXPositionXIsNotInGrid_exepctionIsThrown() {
         val grid = Grid(2, 2)
         val cell = grid[0, 3]
     }
