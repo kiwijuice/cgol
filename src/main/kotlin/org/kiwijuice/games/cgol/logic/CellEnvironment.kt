@@ -1,4 +1,7 @@
-package org.kiwijuice.games.cgol
+package org.kiwijuice.games.cgol.logic
+
+import org.kiwijuice.games.cgol.Cell
+import org.kiwijuice.games.cgol.Grid
 
 class CellEnvironment {
 
@@ -9,7 +12,7 @@ class CellEnvironment {
          * If the cell is located on one of the walls of the grid, the method will return
          * all the available neighbors.
          */
-        fun findNeighborCells(cell: Cell, grid:Grid): Array<Cell> {
+        fun findNeighborCells(cell: Cell, grid: Grid): Array<Cell> {
 
             if (cell.x < 0 || cell.y < 0) {
                 throw IndexOutOfBoundsException("Indexes must be greater than zero")

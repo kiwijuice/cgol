@@ -2,47 +2,21 @@ package org.kiwijuice.games.cgol
 
 import org.kiwijuice.games.cgol.visualization.ConsoleVisualizer
 
-val GRID_SIZE = 70
+private val GRID_SIZE = 50
+private val STEP_SPEED_MS = 200L
 
 fun main(args: Array<String>) {
     println("Starting")
 
     var grid = Grid(GRID_SIZE, GRID_SIZE)
 
-    grid[41, 41] = true
-    grid[42, 41] = true
-    grid[40, 42] = true
-    grid[41, 42] = true
-    grid[41, 43] = true
-
-
+    grid[31, 31] = true
+    grid[32, 31] = true
+    grid[30, 32] = true
+    grid[31, 32] = true
+    grid[31, 33] = true
 
     val visualizer = ConsoleVisualizer()
-
-    while (true) {
-
-        visualizer.printGrid(grid)
-
-        Thread.sleep(200)
-
-        val nextGrid = Grid(GRID_SIZE, GRID_SIZE)
-
-        for (cell in grid) {
-            val liveNeighbors = CellEnvironment.findNeighborCells(cell, grid).count { c -> c.isLive }
-            val isAlive = isAlive(cell, liveNeighbors)
-
-            nextGrid[cell.x, cell.y] = isAlive
-        }
-
-        grid = nextGrid
-    }
-}
-
-fun isAlive(cell: Cell, noOfLiveNeighbors: Int): Boolean {
-    if (cell.isLive) {
-        return (noOfLiveNeighbors == 2 || noOfLiveNeighbors == 3)
-    } else {
-        return (noOfLiveNeighbors == 3)
-    }
+    GameEngine(grid, STEP_SPEED_MS, visualizer).run()
 }
 

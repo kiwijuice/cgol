@@ -1,7 +1,9 @@
-package org.kiwijuice.games.cgol
+package org.kiwijuice.games.cgol.logic
 
 
 import org.junit.Test
+import org.kiwijuice.games.cgol.Cell
+import org.kiwijuice.games.cgol.Grid
 import kotlin.test.assertEquals
 
 class CellEnvironmentTest {
