@@ -3,8 +3,11 @@ package org.kiwijuice.games.cgol.visualization
 import org.kiwijuice.games.cgol.Grid
 
 private val CLEAR_CONSOLE_CHARACTERS = "\u001b[H\u001b[2J"
+
 private val ALIVE_CELL_REPRESENTATION = "<#>"
 private val DEAD_CELL_REPRESENTATION = "   "
+private val HORIZONTAL_WALL_UNIT = "---"
+private val VERTICAL_WALL_UNIT = "|"
 
 class ConsoleVisualizer : GridVisualizer {
 
@@ -20,26 +23,28 @@ class ConsoleVisualizer : GridVisualizer {
         printWallRow(grid)
     }
 
-
     private fun clearConsole() {
         print(CLEAR_CONSOLE_CHARACTERS)
     }
 
     private fun printWallRow(grid: Grid) {
-        print(" ")
+        print(VERTICAL_WALL_UNIT)
+
         for (i in 0 until grid.width) {
-            print("---")
+            print(HORIZONTAL_WALL_UNIT)
         }
-        println(" ")
+
+        println(VERTICAL_WALL_UNIT)
     }
 
     private fun printCellsRow(grid: Grid, y: Int) {
-        print("(")
+        print(VERTICAL_WALL_UNIT)
+
         for (x in 0 until grid.width) {
-            val cell = grid[x, y]
-            printCell(cell.isLive)
+            printCell(grid[x, y].isLive)
         }
-        println(")")
+
+        println(VERTICAL_WALL_UNIT)
     }
 
     private fun printCell(isLive: Boolean) {
