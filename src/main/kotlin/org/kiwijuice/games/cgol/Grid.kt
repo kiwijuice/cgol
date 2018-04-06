@@ -1,7 +1,29 @@
 package org.kiwijuice.games.cgol
 private typealias CellGrid = Array<BooleanArray>
 
-class Grid(val width:Int, val height:Int) {
+class Grid(val width:Int, val height:Int) : Iterable<Cell> {
+
+    class GridIterator(val grid: Grid) : Iterator<Cell>  {
+
+        private var cursor = 0
+        private val numberOfCells = grid.width * grid.height
+
+        override fun hasNext(): Boolean {
+            return cursor < numberOfCells
+        }
+
+        override fun next(): Cell {
+            val y = cursor / grid.width
+            val x = cursor % grid.width
+
+            cursor++
+            return grid[x, y]
+        }
+    }
+
+    override fun iterator(): Iterator<Cell> {
+        return GridIterator(this)
+    }
 
     var cellGrid: CellGrid = Array(height, {
         BooleanArray(width)
