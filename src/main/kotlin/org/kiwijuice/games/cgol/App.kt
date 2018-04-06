@@ -19,4 +19,3 @@ fun main(args: Array<String>) {
     val visualizer = ConsoleVisualizer()
     GameEngine(grid, STEP_SPEED_MS, visualizer).run()
 }
-
