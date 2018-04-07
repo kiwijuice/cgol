@@ -63,9 +63,34 @@ class CellEnvironmentTest {
     }
 
     @Test(expected = IndexOutOfBoundsException::class)
-    fun findNeighborCells_ifCellPositionIsOutOfGrid_throwsException() {
+    fun findNeightborCells_ifXPositionIsLessThanZero_throwsException() {
         val grid = Grid(10, 10)
-        val cell = Cell(true, 10, 0)
+        val cell = Cell(true, -1, 0)
+        CellEnvironment.findNeighborCells(cell, grid)
+    }
+
+    @Test(expected = IndexOutOfBoundsException::class)
+    fun findNeightborCells_ifYPositionIsLessThanZero_throwsException() {
+        val grid = Grid(10, 10)
+        val cell = Cell(true, 0, -1)
+        CellEnvironment.findNeighborCells(cell, grid)
+    }
+
+    @Test(expected = IndexOutOfBoundsException::class)
+    fun findNeighborCells_ifXPositionIsEqualsOrGreaterThanWidth_throwsException() {
+        val width = 5
+        val height = 10
+        val grid = Grid(width, height)
+        val cell = Cell(true, 5, 0)
+        CellEnvironment.findNeighborCells(cell, grid)
+    }
+
+    @Test(expected = IndexOutOfBoundsException::class)
+    fun findNeighborCells_ifYPositionIsEqualsOrGreaterThanHeight_throwsException() {
+        val width = 10
+        val height = 5
+        val grid = Grid(width, height)
+        val cell = Cell(true, 0, 5)
         CellEnvironment.findNeighborCells(cell, grid)
     }
 }
