@@ -11,14 +11,23 @@ import org.kiwijuice.games.cgol.visualization.GridVisualizer
  */
 class GameEngine(private var grid: Grid,
                  private val stepSpeedMs: Long,
-                 private val visualizer: GridVisualizer) {
+                 private val visualizer: GridVisualizer) : Runnable {
 
-    fun run() {
-        while (true) {
-            visualizer.printGrid(grid)
+    private var running = true
+
+    override fun run() {
+
+        var step = 0
+
+        while (running) {
+            visualizer.printGrid(grid, step++)
             Thread.sleep(stepSpeedMs)
             grid = TimeStepEvaluator.evaluteNextGrid(grid)
         }
+    }
+
+    fun stop() {
+        running = false
     }
 
 }

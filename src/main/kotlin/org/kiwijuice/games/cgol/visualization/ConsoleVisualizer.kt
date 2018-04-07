@@ -11,9 +11,10 @@ private val VERTICAL_WALL_UNIT = "|"
 
 class ConsoleVisualizer : GridVisualizer {
 
-    override fun printGrid(grid: Grid) {
+    override fun printGrid(grid: Grid, stepNumber: Int) {
         clearConsole()
 
+        printStepNumber(stepNumber)
         printWallRow(grid)
 
         for (y in 0 until grid.height) {
@@ -23,9 +24,9 @@ class ConsoleVisualizer : GridVisualizer {
         printWallRow(grid)
     }
 
-    private fun clearConsole() {
-        print(CLEAR_CONSOLE_CHARACTERS)
-    }
+    private fun clearConsole() = print(CLEAR_CONSOLE_CHARACTERS)
+
+    private fun printStepNumber(stepNumber: Int) = println("Current step: $stepNumber")
 
     private fun printWallRow(grid: Grid) {
         print(VERTICAL_WALL_UNIT)
