@@ -18,7 +18,7 @@
         <main.class>org.kiwijuice.games.cgol.AppKt</main.class>
         <plugins.exec.version>1.6.0</plugins.exec.version>
         <plugins.assembly.version>3.1.0</plugins.assembly.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
